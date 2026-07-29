@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Am I Now? — A Second Bloom Reflection for Quiet Pivot Readers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F2EA;
+    --cream-deep: #F0E8D8;
+    --sage: #8CA184;
+    --sage-deep: #5F7355;
+    --sage-pale: #C9D4C3;
+    --terracotta: #C97B5F;
+    --terracotta-deep: #A85F45;
+    --blush: #E8C9C2;
+    --ink: #3F3A34;
+    --ink-soft: #6B6459;
+    --gold: #C9A66B;
+    --paper: #FBF8F2;
+    --radius-organic: 38px 12px 38px 12px;
+    --shadow: 0 20px 50px -20px rgba(63, 58, 52, 0.25);
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: 'Karla', sans-serif;
+    color: var(--ink);
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: radial-gradient(circle at 20% 10%, var(--cream-deep), var(--cream) 60%);
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .card {
+    background: var(--paper);
+    border-radius: var(--radius-organic);
+    box-shadow: var(--shadow);
+    padding: 48px 44px 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(140, 161, 132, 0.18);
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--blush) 0%, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  @media (max-width: 560px) {
+    .card { padding: 34px 24px 30px; }
+  }
+
+  /* ---------- Flower progress ---------- */
+  .flower-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .flower-caption {
+    font-family: 'Karla', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  .petal {
+    transform-origin: 50px 50px;
+    transition: fill 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    fill: var(--sage-pale);
+    transform: scale(0.72);
+  }
+
+  .petal.bloomed {
+    fill: var(--terracotta);
+    transform: scale(1);
+  }
+
+  .flower-center {
+    fill: var(--gold);
+  }
+
+  /* ---------- Typography ---------- */
+  .eyebrow {
+    font-family: 'Karla', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    font-weight: 600;
+    margin: 0 0 10px;
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'Lora', serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.3;
+    text-align: center;
+    margin: 0 0 18px;
+    color: var(--ink);
+  }
+
+  h2.question {
+    font-family: 'Lora', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.42;
+    text-align: center;
+    margin: 22px 0 28px;
+    color: var(--ink);
+  }
+
+  p.body-text {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    text-align: center;
+    margin: 0 0 24px;
+  }
+
+  .center-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    font-family: 'Karla', sans-serif;
+    font-weight: 600;
+    font-size: 15.5px;
+    letter-spacing: 0.01em;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 15px 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .btn:focus-visible {
+    outline: 3px solid var(--sage-deep);
+    outline-offset: 3px;
+  }
+
+  .btn-primary {
+    background: var(--sage-deep);
+    color: var(--paper);
+    box-shadow: 0 10px 24px -10px rgba(95, 115, 85, 0.6);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(95, 115, 85, 0.7); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--sage-deep);
+    border: 1.5px solid var(--sage-pale);
+    padding: 13px 28px;
+  }
+
+  .btn-ghost:hover { background: var(--sage-pale); }
+
+  /* ---------- Answer options ---------- */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option {
+    text-align: left;
+    background: var(--cream);
+    border: 1.5px solid transparent;
+    border-radius: 18px;
+    padding: 16px 20px;
+    font-family: 'Karla', sans-serif;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+  }
+
+  .option:hover {
+    border-color: var(--sage);
+    background: var(--sage-pale);
+    transform: translateX(3px);
+  }
+
+  .option:focus-visible {
+    outline: 3px solid var(--sage-deep);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Nav row ---------- */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 26px;
+  }
+
+  .back-link {
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .back-link:disabled { visibility: hidden; }
+
+  /* ---------- Result ---------- */
+  .result-badge {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--terracotta-deep);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .result-title {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+
+  .result-body {
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    text-align: left;
+    margin: 0 0 20px;
+  }
+
+  .result-note {
+    background: var(--cream);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 4px 14px 14px 4px;
+    padding: 16px 20px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 28px;
+    text-align: left;
+  }
+
+  .result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--sage-pale);
+    margin: 28px 0 20px;
+  }
+
+  .footer {
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .footer strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--sage-deep);
+  }
+
+  .tagline {
+    font-family: 'Karla', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="card">
+
+    <!-- INTRO SCREEN -->
+    <div id="screen-intro" class="fade-in">
+      <div class="flower-wrap">
+        <svg id="flower-intro" width="88" height="88" viewBox="0 0 100 100"></svg>
+      </div>
+      <p class="eyebrow">A Reflection for Quiet Pivot Readers</p>
+      <h1>Who Am I Now?</h1>
+      <p class="body-text">
+        Friend, take a moment before you begin. This isn't a test — there's nothing to get right.
+        It's eight quiet questions to help you notice which season you're actually standing in,
+        underneath the exhaustion, the overwhelm, and everyone else's version of who you are.
+        As you answer, watch the flower slowly open.
+      </p>
+      <div class="center-col">
+        <button class="btn btn-primary" onclick="startQuiz()">Begin the Reflection</button>
+      </div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="screen-quiz" class="hidden">
+      <div class="flower-wrap">
+        <svg id="flower-quiz" width="72" height="72" viewBox="0 0 100 100"></svg>
+        <p class="flower-caption" id="progress-caption">Question 1 of 8</p>
+      </div>
+      <h2 class="question" id="question-text"></h2>
+      <div class="options" id="options-container"></div>
+      <div class="nav-row">
+        <button class="back-link" id="back-btn" onclick="goBack()">&larr; back</button>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="screen-result" class="hidden">
+      <div class="flower-wrap">
+        <svg id="flower-result" width="96" height="96" viewBox="0 0 100 100"></svg>
+      </div>
+      <p class="result-badge" id="result-badge"></p>
+      <h1 class="result-title" id="result-title"></h1>
+      <p class="result-body" id="result-body"></p>
+      <div class="result-note" id="result-note"></div>
+
+      <hr class="divider">
+
+      <p class="eyebrow" style="margin-top:0;">Let's Talk About It</p>
+      <p class="body-text" style="margin-bottom:16px;">
+        Friend, I'd love to hear which season found you. Come tell me about it in the Chat —
+        it's a good place to sit with other women in their own seasons too.
+      </p>
+      <div class="result-actions">
+        <!-- CHAT LINK — replace with your actual Substack Chat URL (Substack app > your publication > Chat tab). -->
+        <a class="btn btn-primary" href="https://drsheilawellness.substack.com/chat" target="_blank" rel="noopener">Join the Conversation</a>
+      </div>
+
+      <div class="result-note" style="text-align:left;">
+        <strong>If you'd like to go a little deeper</strong>, paid subscribers get:
+        <ul style="margin: 10px 0 0; padding-left: 20px; line-height: 1.65;">
+          <li><em>The Quiet Companion</em> - my paid-only weekly column</li>
+          <li>Priority access to Quiet Exhale Sessions, one-on-one time with me</li>
+          <li>Recognition as a founding First Bloom member, if you join at that tier</li>
+        </ul>
+      </div>
+      <div class="result-actions">
+        <!-- PAID SUBSCRIBE LINK — this takes readers to your Substack's native subscribe/checkout page. -->
+        <a class="btn btn-primary" href="https://drsheilawellness.substack.com/subscribe" target="_blank" rel="noopener">See Paid Perks</a>
+        <button class="btn btn-ghost" onclick="restartQuiz()">Retake the Reflection</button>
+      </div>
+
+      <hr class="divider">
+      <p class="footer" id="closing-line">Sit down and stay awhile.<br>
+        With gratitude, <strong>Dr. Sheila</strong>, SJ Wellness
+        <div class="tagline">Gentle Wellness, Reflective Living, and Shining Your True Light.</div>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ---------- Data ----------
+  const questions = [
+    {
+      text: "When you think about your energy most days, what feels true?",
+      options: [
+        { stage: "root", text: "I'm running on empty — even simple things feel like too much." },
+        { stage: "seed", text: "I have some energy, but I second-guess how to spend it." },
+        { stage: "bud", text: "It comes and goes, but I notice small sparks returning." },
+        { stage: "bloom", text: "I feel more like myself, energy-wise, than I have in a while." }
+      ]
+    },
+    {
+      text: "Your mental to-do list lately feels like…",
+      options: [
+        { stage: "root", text: "A weight I can't set down, even for a moment." },
+        { stage: "seed", text: "A fog — I know things need doing, but I can't find the thread." },
+        { stage: "bud", text: "Long, but I'm learning to let a few things wait." },
+        { stage: "bloom", text: "Manageable. I'm choosing what matters and releasing the rest." }
+      ]
+    },
+    {
+      text: "If someone asked, \"Who are you, really?\" today, you'd…",
+      options: [
+        { stage: "root", text: "Struggle to answer. I've been everyone else's for so long." },
+        { stage: "seed", text: "Feel the question stir something I haven't looked at in years." },
+        { stage: "bud", text: "Have a few new answers taking shape, though I'm still finding the words." },
+        { stage: "bloom", text: "Answer with something true — something that's mine." }
+      ]
+    },
+    {
+      text: "In your closest relationships, you feel…",
+      options: [
+        { stage: "root", text: "Unseen — the version of me they know isn't who I am now." },
+        { stage: "seed", text: "Cautious about being fully known, unsure what I'd even show them." },
+        { stage: "bud", text: "A little braver about sharing what's shifting in me." },
+        { stage: "bloom", text: "Genuinely seen — and it feels like relief." }
+      ]
+    },
+    {
+      text: "When you imagine caring for yourself, it feels…",
+      options: [
+        { stage: "root", text: "Impossible. There's no room left in the day." },
+        { stage: "seed", text: "Like a nice idea I keep postponing." },
+        { stage: "bud", text: "Like something I'm slowly making space for." },
+        { stage: "bloom", text: "Like a rhythm I've started to protect." }
+      ]
+    },
+    {
+      text: "Most days, your emotional weather is…",
+      options: [
+        { stage: "root", text: "Heavy skies — a tiredness or numbness that doesn't lift easily." },
+        { stage: "seed", text: "Unsettled, with old feelings surfacing I thought I'd dealt with." },
+        { stage: "bud", text: "Changeable, but with more light breaking through than before." },
+        { stage: "bloom", text: "Calmer, steadier. Even on hard days, I find my footing." }
+      ]
+    },
+    {
+      text: "What you crave most right now is…",
+      options: [
+        { stage: "root", text: "Rest. Real rest, without guilt attached to it." },
+        { stage: "seed", text: "Permission to ask the big questions without rushing to answers." },
+        { stage: "bud", text: "Room to try new things without pressure to have it figured out." },
+        { stage: "bloom", text: "Witnesses — people who see this new season and celebrate it with me." }
+      ]
+    },
+    {
+      text: "When you picture your next chapter, you feel…",
+      options: [
+        { stage: "root", text: "Too tired to picture anything past today." },
+        { stage: "seed", text: "Curious, but unsure what I'm even picturing yet." },
+        { stage: "bud", text: "Hopeful — like something is quietly taking shape." },
+        { stage: "bloom", text: "Excited. I can see her, and she looks like me." }
+      ]
+    }
+  ];
+
+  const results = {
+    root: {
+      badge: "Your Season",
+      title: "The Root Season",
+      body: "Friend, you're in the Root Season — the deep, unglamorous work of resting in the soil before anything is asked to grow. This isn't falling behind. It's the most honest place to be when exhaustion has been the truest thing about your days. Nothing here is broken; it's dormant, and dormant things are not dying. They're gathering strength underground, out of sight, exactly where they need to be right now.",
+      note: "What this season may be asking of you: permission to rest without earning it first. Before anything else, that's enough."
+    },
+    seed: {
+      badge: "Your Season",
+      title: "The Seed Season",
+      body: "Friend, you're in the Seed Season — cracked open just enough for questions to get in. The roles you've worn for years are loosening, and \"who am I now?\" keeps surfacing, even when you push it back down. This is quiet, uncertain work. There's no green shoot to point to yet. But something is stirring beneath the surface, and it's real, even before it's visible.",
+      note: "What this season may be asking of you: a little space to sit with the questions, without rushing toward tidy answers."
+    },
+    bud: {
+      badge: "Your Season",
+      title: "The Budding Season",
+      body: "Friend, you're in the Budding Season — the tender, hopeful stretch where you're stirring back to life. You're noticing small sparks again: curiosity, a little courage, a willingness to try something new even without a guarantee. It's not fully bloomed yet, and it doesn't need to be. Buds don't rush themselves open, and neither do you.",
+      note: "What this season may be asking of you: gentle, low-pressure steps toward the things that are quietly calling you back."
+    },
+    bloom: {
+      badge: "Your Season",
+      title: "The Second Bloom",
+      body: "Friend, you're in the Second Bloom — the season this whole reflection is named for. You're becoming visible again, on your own terms, and it shows: in steadier footing, in relationships where you feel truly known, in a version of you that finally feels like yours. This isn't the end of the growing. It's proof that rest, questions, and small brave steps really do lead somewhere.",
+      note: "What this season may be asking of you: to let yourself be seen in it, without shrinking back down to make it easier for anyone else."
+    }
+  };
+
+  const stageOrder = ["root", "seed", "bud", "bloom"];
+
+  // ---------- State ----------
+  let currentIndex = 0;
+  let answers = []; // stores stage string per answered question
+
+  // ---------- Flower rendering ----------
+  function buildFlowerSVG(svgEl, petalCount) {
+    svgEl.innerHTML = "";
+    const ns = "http://www.w3.org/2000/svg";
+    const group = document.createElementNS(ns, "g");
+    for (let i = 0; i < petalCount; i++) {
+      const angle = (360 / petalCount) * i;
+      const petal = document.createElementNS(ns, "ellipse");
+      petal.setAttribute("cx", "50");
+      petal.setAttribute("cy", "27");
+      petal.setAttribute("rx", "9");
+      petal.setAttribute("ry", "19");
+      petal.setAttribute("class", "petal");
+      petal.setAttribute("data-index", i);
+      petal.setAttribute("transform", `rotate(${angle} 50 50)`);
+      group.appendChild(petal);
+    }
+    const center = document.createElementNS(ns, "circle");
+    center.setAttribute("cx", "50");
+    center.setAttribute("cy", "50");
+    center.setAttribute("r", "9");
+    center.setAttribute("class", "flower-center");
+    group.appendChild(center);
+    svgEl.appendChild(group);
+  }
+
+  function updateFlowerProgress(svgEl, answeredCount) {
+    const petals = svgEl.querySelectorAll(".petal");
+    petals.forEach((p, i) => {
+      if (i < answeredCount) p.classList.add("bloomed");
+      else p.classList.remove("bloomed");
+    });
+  }
+
+  function fullyBloom(svgEl) {
+    svgEl.querySelectorAll(".petal").forEach(p => p.classList.add("bloomed"));
+  }
+
+  // ---------- Screen control ----------
+  const screenIntro = document.getElementById("screen-intro");
+  const screenQuiz = document.getElementById("screen-quiz");
+  const screenResult = document.getElementById("screen-result");
+
+  buildFlowerSVG(document.getElementById("flower-intro"), 8);
+  buildFlowerSVG(document.getElementById("flower-quiz"), 8);
+  buildFlowerSVG(document.getElementById("flower-result"), 8);
+
+  function startQuiz() {
+    screenIntro.classList.add("hidden");
+    screenQuiz.classList.remove("hidden");
+    screenQuiz.classList.add("fade-in");
+    currentIndex = 0;
+    answers = [];
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = questions[currentIndex];
+    document.getElementById("question-text").textContent = q.text;
+    document.getElementById("progress-caption").textContent = `Question ${currentIndex + 1} of ${questions.length}`;
+    document.getElementById("back-btn").disabled = currentIndex === 0;
+
+    const container = document.getElementById("options-container");
+    container.innerHTML = "";
+    q.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.className = "option";
+      btn.textContent = opt.text;
+      btn.onclick = () => selectAnswer(opt.stage);
+      container.appendChild(btn);
+    });
+
+    updateFlowerProgress(document.getElementById("flower-quiz"), currentIndex);
+
+    const qText = document.getElementById("question-text");
+    qText.classList.remove("fade-in");
+    void qText.offsetWidth;
+    qText.classList.add("fade-in");
+  }
+
+  function selectAnswer(stage) {
+    answers[currentIndex] = stage;
+    if (currentIndex < questions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+    } else {
+      updateFlowerProgress(document.getElementById("flower-quiz"), questions.length);
+      setTimeout(showResult, 350);
+    }
+  }
+
+  function goBack() {
+    if (currentIndex === 0) return;
+    currentIndex--;
+    renderQuestion();
+  }
+
+  function computeStage() {
+    const counts = { root: 0, seed: 0, bud: 0, bloom: 0 };
+    answers.forEach(s => { if (s) counts[s]++; });
+    let best = "root";
+    let bestCount = -1;
+    stageOrder.forEach(s => {
+      if (counts[s] > bestCount) {
+        bestCount = counts[s];
+        best = s;
+      }
+    });
+    return best;
+  }
+
+  function showResult() {
+    screenQuiz.classList.add("hidden");
+    screenResult.classList.remove("hidden");
+    screenResult.classList.add("fade-in");
+
+    const stage = computeStage();
+    const r = results[stage];
+    document.getElementById("result-badge").textContent = r.badge;
+    document.getElementById("result-title").textContent = r.title;
+    document.getElementById("result-body").textContent = r.body;
+    document.getElementById("result-note").textContent = r.note;
+
+    fullyBloom(document.getElementById("flower-result"));
+
+    const closingLines = [
+      "Sit down and stay awhile.",
+      "Sit down, let's drink some tea.",
+      "Sit down and relax for a moment.",
+      "Sit down & pause for a moment."
+    ];
+    const line = closingLines[Math.floor(Math.random() * closingLines.length)];
+    document.getElementById("closing-line").innerHTML =
+      line + '<br>With gratitude, <strong>Dr. Sheila</strong>, SJ Wellness' +
+      '<div class="tagline">Gentle Wellness, Reflective Living, and Shining Your True Light.</div>';
+  }
+
+  function restartQuiz() {
+    screenResult.classList.add("hidden");
+    screenIntro.classList.remove("hidden");
+    screenIntro.classList.add("fade-in");
+    buildFlowerSVG(document.getElementById("flower-quiz"), 8);
+    buildFlowerSVG(document.getElementById("flower-result"), 8);
+  }
+</script>
+
+</body>
+</html>
